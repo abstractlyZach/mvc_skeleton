@@ -5,6 +5,7 @@ class EventManager(object):
     """Coordinates communication between model, view, and controller."""
     def __init__(self):
         self._listeners = weakref.WeakKeyDictionary()
+        self._events = []
 
     def register_listener(self, listener):
         """Adds a listener to our notification list."""
@@ -19,5 +20,10 @@ class EventManager(object):
     def post(self, event):
         """Notify all the listeners that an event has occurred."""
         # print(str(event))
+        self._events.append(event)
         for listener in self._listeners.keys():
             listener.notify(event)
+
+    @property
+    def events(self):
+        return self._events
