@@ -20,7 +20,7 @@ class Model(object):
         """Starts the game loop. Pumps a tick into the event manager for
         each loop."""
         self._running = True
-        # self._event_manager.post(events.InitializeEvent)
+        self._event_manager.post(events.InitializeEvent)
         while self._running:
             tick = events.TickEvent()
             self._event_manager.post(tick)

@@ -22,5 +22,5 @@ def test_model_four_ticks_before_quit():
     game_state = model.Model(event_manager)
     quitter = QuitsAfterFourTicks(event_manager)
     game_state.run()
-    assert len(event_manager.events) == 5
+    assert len(event_manager.events) == 6
 

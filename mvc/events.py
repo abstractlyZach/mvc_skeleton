@@ -7,6 +7,11 @@ class Event(object):
         return self._name
 
 
+class InitializeEvent(Event):
+    def __init__(self):
+        self._name = 'Initialize Event'
+
+
 class QuitEvent(Event):
     """Event created when user quits the program."""
     def __init__(self):
@@ -22,7 +27,7 @@ class TickEvent(Event):
 class InputEvent(Event):
     """Event created when user gives input."""
     def __init__(self):
-        self._name = "Input Event"
+        self._name = 'Input Event'
 
 
 class KeyPressEvent(InputEvent):
@@ -36,7 +41,7 @@ class KeyPressEvent(InputEvent):
 
 class ClickEvent(InputEvent):
     def __init__(self, position):
-        self._name = "Click Event"
+        self._name = 'Click Event'
         self._position = position
 
     def __str__(self):
@@ -44,4 +49,3 @@ class ClickEvent(InputEvent):
 
 
 
-# InitializeEvent?
