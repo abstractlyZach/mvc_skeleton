@@ -16,7 +16,6 @@ class QuitsAfterFourTicks(object):
                 self._event_manager.post(events.QuitEvent())
 
 
-
 def test_model_four_ticks_before_quit():
     event_manager = eventmanager.EventManager()
     game_state = model.Model(event_manager)
