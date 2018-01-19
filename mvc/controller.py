@@ -6,5 +6,5 @@ class Controller(object):
         self._event_manager.register_listener(self)
         self._model = model
 
-    def notify(self):
+    def notify(self, event):
         pass
