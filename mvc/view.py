@@ -12,17 +12,46 @@ class GraphicalView(object):
         self._screen = None
         self._small_font = None
         self._text = 'The View is drawing on your screen!'
+        self._starting_new_word = False
 
     def notify(self, event):
         if isinstance(event, events.QuitEvent):
-            # is this correct?
+            # ends the pygame graphical display
             pygame.quit()
         elif isinstance(event, events.InitializeEvent):
             self.initialize()
         elif isinstance(event, events.TickEvent):
             self.render_all()
-        elif isinstance(event, events.InputEvent):
-            self._text = pygame.key.name(event.key)
+        elif isinstance(event, events.KeyPressEvent):
+            self._handle_keypress(event)
+
+    def _handle_keypress(self, event):
+        key_text = pygame.key.name(event.key)
+        if len(key_text) == 1:
+            self._update_text_with_char_input(key_text)
+        else:
+            self._handle_non_alphanum_keypress(key_text)
+
+    def _update_text_with_char_input(self, new_char):
+        if self._starting_new_word:
+            self._text = new_char
+            self._starting_new_word = False
+        else:
+            self._text += new_char
+
+    def _handle_non_alphanum_keypress(self, key_text):
+        if key_text == 'return':
+            self._starting_new_word = True
+        elif key_text == 'space':
+            self._update_text_with_char_input(' ')
+        elif key_text == 'backspace':
+            self._backspace()
+        else:
+            pass
+
+    def _backspace(self):
+        self._text = self._text[:-1]
+
 
     def render_all(self):
         if not self._is_initialized:

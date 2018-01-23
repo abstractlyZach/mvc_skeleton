@@ -1,3 +1,6 @@
+import pygame
+
+
 class Event(object):
     """Superclass for events."""
     def __init__(self):
@@ -36,7 +39,8 @@ class KeyPressEvent(InputEvent):
         self._key = key
 
     def __str__(self):
-        return '{}: {}'.format(self._name, self._key)
+        key_name = pygame.key.name(self._key)
+        return '{}: {}'.format(self._name, key_name)
 
     @property
     def key(self):
