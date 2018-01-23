@@ -1,3 +1,8 @@
+import pygame
+
+from . import events
+
+
 class Controller(object):
     """Handles input by posting events to the event manager when input
     happens."""
@@ -7,4 +12,15 @@ class Controller(object):
         self._model = model
 
     def notify(self, event):
-        pass
+        if isinstance(event, events.TickEvent):
+            for input_event in pygame.event.get():
+                self._handle_event(input_event)
+
+    def _handle_event(self, event):
+        if event.type == pygame.QUIT:
+            self._event_manager.post(events.QuitEvent())
+        elif (event.type == pygame.KEYUP) and \
+                (event.key == pygame.K_ESCAPE):
+            self._event_manager.post(events.QuitEvent())
+
+
