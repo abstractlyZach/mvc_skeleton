@@ -22,5 +22,7 @@ class Controller(object):
         elif (event.type == pygame.KEYUP) and \
                 (event.key == pygame.K_ESCAPE):
             self._event_manager.post(events.QuitEvent())
+        elif (event.type == pygame.KEYUP):
+            self._event_manager.post(events.KeyPressEvent(event.key))
 
 

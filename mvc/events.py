@@ -38,6 +38,10 @@ class KeyPressEvent(InputEvent):
     def __str__(self):
         return '{}: {}'.format(self._name, self._key)
 
+    @property
+    def key(self):
+        return self._key
+
 
 class ClickEvent(InputEvent):
     def __init__(self, position):
