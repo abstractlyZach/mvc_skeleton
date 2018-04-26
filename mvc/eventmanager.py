@@ -1,7 +1,13 @@
+import logging
 import weakref
 
 from . import events
 
+
+def should_be_logged(event):
+    """Returns True if the event should be logged."""
+    if not isinstance(event, events.TickEvent):
+        return True
 
 class EventManager(object):
     """Coordinates communication between model, view, and controller."""
@@ -21,8 +27,8 @@ class EventManager(object):
 
     def post(self, event):
         """Notify all the listeners that an event has occurred."""
-        if not isinstance(event, events.TickEvent):
-            print(str(event))
+        if should_be_logged(event):
+            logging.info(str(event))
         self._events.append(event)
         for listener in self._listeners.keys():
             listener.notify(event)
