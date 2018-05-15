@@ -6,9 +6,9 @@ from . import events
 class Controller(object):
     """Handles input by posting events to the event manager when input
     happens."""
-    def __init__(self, event_manager, model):
-        self._event_manager = event_manager
-        self._event_manager.register_listener(self)
+    def __init__(self, main_event_manager, input_event_manager, model):
+        main_event_manager.register_listener(self)
+        self._input_event_manager = input_event_manager
         self._model = model
 
     def notify(self, event):
@@ -18,11 +18,11 @@ class Controller(object):
 
     def _handle_event(self, event):
         if event.type == pygame.QUIT:
-            self._event_manager.post(events.QuitEvent())
+            self._input_event_manager.post(events.QuitEvent())
         elif (event.type == pygame.KEYUP) and \
                 (event.key == pygame.K_ESCAPE):
-            self._event_manager.post(events.QuitEvent())
+            self._input_event_manager.post(events.QuitEvent())
         elif (event.type == pygame.KEYUP):
-            self._event_manager.post(events.KeyPressEvent(event.key))
+            self._input_event_manager.post(events.KeyPressEvent(event.key))
 
 

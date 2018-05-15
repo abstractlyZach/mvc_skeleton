@@ -12,10 +12,14 @@ def set_up_logging():
 
 def main():
     set_up_logging()
-    event_manager = eventmanager.EventManager()
-    game_model = model.Model(event_manager)
-    keyboard = controller.Controller(event_manager, game_model)
-    graphics = view.GraphicalView(event_manager, game_model)
+    # handles initialize, quit, and ticks
+    main_event_manager = eventmanager.EventManager()
+    input_event_manager = eventmanager.EventManager()
+    game_model = model.Model(main_event_manager, input_event_manager)
+    keyboard = controller.Controller(main_event_manager,
+                                     input_event_manager,
+                                     game_model)
+    graphics = view.GraphicalView(main_event_manager, game_model)
     game_model.run()
 
 

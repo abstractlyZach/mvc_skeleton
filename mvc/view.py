@@ -6,8 +6,8 @@ from mvc import events
 
 class GraphicalView(object):
     """Draws the model's state to the screen."""
-    def __init__(self, event_manager, model):
-        event_manager.register_listener(self)
+    def __init__(self, main_event_manager, model):
+        main_event_manager.register_listener(self)
         self._model = model
         self._is_initialized = False
         self._screen = None
