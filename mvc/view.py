@@ -16,14 +16,18 @@ class GraphicalView(object):
 
     def notify(self, event):
         if isinstance(event, events.QuitEvent):
-            # ends the pygame graphical display
-            pygame.quit()
+            self._handle_quit()
         elif isinstance(event, events.InitializeEvent):
             self.initialize()
         elif isinstance(event, events.TickEvent):
             self.render_all()
         elif isinstance(event, events.KeyPressEvent):
             self._handle_keypress(event)
+
+    def _handle_quit(self):
+        self._is_initialized = False
+        # ends the pygame graphical display
+        pygame.quit()
 
     def _handle_keypress(self, event):
         key_text = pygame.key.name(event.key)
