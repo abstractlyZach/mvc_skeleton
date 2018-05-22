@@ -1,7 +1,7 @@
 import logging
 import pygame
 
-from mvc import events
+from . import events
 
 
 class GraphicalView(object):
